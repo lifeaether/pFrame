@@ -7,16 +7,17 @@
 //
 
 #import "AppDelegate.h"
+#import "FrameWindowController.h"
 
 @interface AppDelegate ()
 
-@property (weak) IBOutlet NSWindow *window;
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    [[self frameWindowController] showWindow:self];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

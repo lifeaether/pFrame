@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="FrameWindowController">
+            <connections>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="FrameWindow">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="318"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="318"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0dI-Kx-qRq" customClass="FrameView">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="318"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Y3L-rq-ihg"/>
+                    </imageView>
+                    <visualEffectView wantsLayer="YES" appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Sgc-la-biF">
+                        <rect key="frame" x="20" y="20" width="440" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="f3M-sh-XqD"/>
+                        </constraints>
+                    </visualEffectView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Sgc-la-biF" secondAttribute="bottom" constant="20" id="D8U-2x-24f"/>
+                    <constraint firstItem="0dI-Kx-qRq" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="NDz-pU-y2l"/>
+                    <constraint firstItem="Sgc-la-biF" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="Xox-1Y-0sY"/>
+                    <constraint firstAttribute="trailing" secondItem="0dI-Kx-qRq" secondAttribute="trailing" id="cqM-cQ-MEa"/>
+                    <constraint firstAttribute="bottom" secondItem="0dI-Kx-qRq" secondAttribute="bottom" id="dri-I2-8eh"/>
+                    <constraint firstAttribute="trailing" secondItem="Sgc-la-biF" secondAttribute="trailing" constant="20" id="m2r-7C-Jb4"/>
+                    <constraint firstItem="0dI-Kx-qRq" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="n6B-BG-iH0"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="286" y="402"/>
+        </window>
+    </objects>
+</document>

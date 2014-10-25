@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE05EFB519FB332B0067E51C /* FrameWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05EFB319FB332B0067E51C /* FrameWindowController.m */; };
+		CE05EFB619FB332B0067E51C /* FrameWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05EFB419FB332B0067E51C /* FrameWindowController.xib */; };
+		CE05EFB919FB33550067E51C /* FrameWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05EFB819FB33550067E51C /* FrameWindow.m */; };
+		CE05EFBF19FB3B7B0067E51C /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05EFBE19FB3B7B0067E51C /* FrameView.m */; };
 		CEB0C0CB19FA85DB0076CC76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB0C0CA19FA85DB0076CC76 /* AppDelegate.m */; };
 		CEB0C0CD19FA85DB0076CC76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB0C0CC19FA85DB0076CC76 /* main.m */; };
 		CEB0C0CF19FA85DB0076CC76 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB0C0CE19FA85DB0076CC76 /* Images.xcassets */; };
@@ -25,6 +29,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE05EFB219FB332B0067E51C /* FrameWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FrameWindowController.h; path = ../FrameWindowController.h; sourceTree = "<group>"; };
+		CE05EFB319FB332B0067E51C /* FrameWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FrameWindowController.m; path = ../FrameWindowController.m; sourceTree = "<group>"; };
+		CE05EFB419FB332B0067E51C /* FrameWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FrameWindowController.xib; path = ../FrameWindowController.xib; sourceTree = "<group>"; };
+		CE05EFB719FB33550067E51C /* FrameWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameWindow.h; sourceTree = "<group>"; };
+		CE05EFB819FB33550067E51C /* FrameWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameWindow.m; sourceTree = "<group>"; };
+		CE05EFBD19FB3B7B0067E51C /* FrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameView.h; sourceTree = "<group>"; };
+		CE05EFBE19FB3B7B0067E51C /* FrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameView.m; sourceTree = "<group>"; };
 		CEB0C0C419FA85DB0076CC76 /* pFrame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pFrame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0C0C819FA85DB0076CC76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEB0C0C919FA85DB0076CC76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -78,8 +89,15 @@
 			children = (
 				CEB0C0C919FA85DB0076CC76 /* AppDelegate.h */,
 				CEB0C0CA19FA85DB0076CC76 /* AppDelegate.m */,
-				CEB0C0CE19FA85DB0076CC76 /* Images.xcassets */,
 				CEB0C0D019FA85DB0076CC76 /* MainMenu.xib */,
+				CE05EFB219FB332B0067E51C /* FrameWindowController.h */,
+				CE05EFB319FB332B0067E51C /* FrameWindowController.m */,
+				CE05EFB419FB332B0067E51C /* FrameWindowController.xib */,
+				CE05EFB719FB33550067E51C /* FrameWindow.h */,
+				CE05EFB819FB33550067E51C /* FrameWindow.m */,
+				CE05EFBD19FB3B7B0067E51C /* FrameView.h */,
+				CE05EFBE19FB3B7B0067E51C /* FrameView.m */,
+				CEB0C0CE19FA85DB0076CC76 /* Images.xcassets */,
 				CEB0C0C719FA85DB0076CC76 /* Supporting Files */,
 			);
 			path = pFrame;
@@ -191,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE05EFB619FB332B0067E51C /* FrameWindowController.xib in Resources */,
 				CEB0C0CF19FA85DB0076CC76 /* Images.xcassets in Resources */,
 				CEB0C0D219FA85DB0076CC76 /* MainMenu.xib in Resources */,
 			);
@@ -210,8 +229,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE05EFB519FB332B0067E51C /* FrameWindowController.m in Sources */,
+				CE05EFBF19FB3B7B0067E51C /* FrameView.m in Sources */,
 				CEB0C0CD19FA85DB0076CC76 /* main.m in Sources */,
 				CEB0C0CB19FA85DB0076CC76 /* AppDelegate.m in Sources */,
+				CE05EFB919FB33550067E51C /* FrameWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +420,7 @@
 				CEB0C0E319FA85DB0076CC76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CEB0C0E419FA85DB0076CC76 /* Build configuration list for PBXNativeTarget "pFrameTests" */ = {
 			isa = XCConfigurationList;
@@ -406,6 +429,7 @@
 				CEB0C0E619FA85DB0076CC76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
