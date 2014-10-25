@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FrameView.h"
 
 @protocol FrameWindowDataSource <NSObject>
 
@@ -16,10 +17,12 @@
 
 @end
 
-@interface FrameWindowController : NSWindowController
+@interface FrameWindowController : NSWindowController<FrameViewDelegate>
 
-@property (retain) id <FrameWindowDataSource> dataSource;
+@property (weak) id <FrameWindowDataSource> dataSource;
+
 @property (retain,readonly) NSImage *image;
+@property (getter=isHiddenControls) BOOL hiddenControls;
 
 - (void)reloadData;
 

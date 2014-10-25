@@ -8,6 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
+@protocol FrameViewDelegate <NSObject>
+
+@optional - (void)frameViewMouseEntered;
+@optional - (void)frameViewMouseExited;
+
+@end
+
 @interface FrameView : NSImageView
+
+@property (weak) IBOutlet id <FrameViewDelegate> delegate;
 
 @end

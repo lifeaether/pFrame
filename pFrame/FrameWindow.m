@@ -14,6 +14,8 @@
 {
     self = [super initWithContentRect:contentRect styleMask:aStyle backing:bufferingType defer:flag];
     if ( self ) {
+//        [self setOpaque:NO];
+//        [self setBackgroundColor:[NSColor clearColor]];
         [self setTitleVisibility:NSWindowTitleHidden];
         [self setTitlebarAppearsTransparent:YES];
     }

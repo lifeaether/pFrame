@@ -117,6 +117,12 @@
                             if ( error ) {
                                 [images setValue:[NSNull null] forKey:key];
                             } else {
+                                NSArray *representations = [image representations];
+                                if ( [representations count] ) {
+                                    NSImageRep *representation = [representations objectAtIndex:0];
+                                    NSSize newSize = NSMakeSize( [representation pixelsWide], [representation pixelsHigh] );
+                                    [image setSize:newSize];
+                                }
                                 [images setValue:image forKey:key];
                             }
                         }];
