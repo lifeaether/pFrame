@@ -34,31 +34,6 @@
         [[self frameWindowController] reloadData];
     }];
     [task resume];
-    
-//    PixivScrapper *scrapper =
-//    NSURLSessionTask *task = [scrapper loadTaskForCountOfBookmark:^(NSInteger count, NSError *error){
-//        NSLog( @"%@", error );
-//        NSLog( @"%ld", count );
-//    }];
-//    [task resume];
-    
-//    NSURLSessionTask *task = [scrapper loadTaskForIdentifiersOnBookmarkAtPageIndex:1 completionHandler:^(NSArray *identifiers, NSError *error) {
-//        NSLog( @"%@", error );
-//        NSLog( @"%@", identifiers );
-//    }];
-//    [task resume];
-    
-/*    NSURLSessionTask *task = [scrapper loadTaskForImageURLWithIdentifier:@"46684018" completionHandler:^(NSURL *imageURL, NSError *error) {
-        NSLog( @"%@", error );
-        NSLog( @"%@", imageURL );
-        NSURLSessionTask *task2 = [scrapper loadTaskForImageWithIdentifer:@"46684018" imageURL:imageURL completionHandler:^(NSImage *image, NSError *error) {
-            NSLog( @"%@", error );
-        }];
-        [task2 resume];
-    }];
-    [task resume];*/
-    
-    
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -92,7 +67,7 @@
 
 - (NSUInteger)numberOfFrameImage:(id)frameWindowController
 {
-    return [[self images] count];
+    return [self numberOfImage];
 }
 
 - (BOOL)readyImageAtIndex:(id)frameWindowController atIndex:(NSUInteger)index
@@ -108,28 +83,32 @@
             if ( error ) {
                 [images setValue:[NSNull null] forKey:key];
             } else {
-                NSString *identifier = [identifiers objectAtIndex:index % [scrapper countPerPage]];
-                NSURLSessionTask *task2 = [scrapper loadTaskForImageURLWithIdentifier:identifier completionHandler:^(NSURL *imageURL, NSError *error) {
-                    if ( error ) {
-                        [images setValue:[NSNull null] forKey:key];
-                    } else {
-                        NSURLSessionTask *task3 = [scrapper loadTaskForImageWithIdentifer:identifier imageURL:imageURL completionHandler:^(NSImage *image, NSError *error) {
-                            if ( error ) {
-                                [images setValue:[NSNull null] forKey:key];
-                            } else {
-                                NSArray *representations = [image representations];
-                                if ( [representations count] ) {
-                                    NSImageRep *representation = [representations objectAtIndex:0];
-                                    NSSize newSize = NSMakeSize( [representation pixelsWide], [representation pixelsHigh] );
-                                    [image setSize:newSize];
+                if ( (index % [scrapper countPerPage]) < [identifiers count] ) {
+                    NSString *identifier = [identifiers objectAtIndex:index % [scrapper countPerPage]];
+                    NSURLSessionTask *task2 = [scrapper loadTaskForImageURLWithIdentifier:identifier completionHandler:^(NSURL *imageURL, NSError *error) {
+                        if ( error ) {
+                            [images setValue:[NSNull null] forKey:key];
+                        } else {
+                            NSURLSessionTask *task3 = [scrapper loadTaskForImageWithIdentifer:identifier imageURL:imageURL completionHandler:^(NSImage *image, NSError *error) {
+                                if ( error ) {
+                                    [images setValue:[NSNull null] forKey:key];
+                                } else {
+                                    NSArray *representations = [image representations];
+                                    if ( [representations count] ) {
+                                        NSImageRep *representation = [representations objectAtIndex:0];
+                                        NSSize newSize = NSMakeSize( [representation pixelsWide], [representation pixelsHigh] );
+                                        [image setSize:newSize];
+                                    }
+                                    [images setValue:image forKey:key];
                                 }
-                                [images setValue:image forKey:key];
-                            }
-                        }];
-                        [task3 resume];
-                    }
-                }];
-                [task2 resume];
+                            }];
+                            [task3 resume];
+                        }
+                    }];
+                    [task2 resume];
+                } else {
+                    [images setValue:[NSNull null] forKey:key];
+                }
             }
         }];
         [task1 resume];

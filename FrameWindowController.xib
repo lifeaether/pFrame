@@ -24,7 +24,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="357"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="4PX-SP-OYl"/>
                         <connections>
-                            <binding destination="-2" name="value" keyPath="image" id="pbQ-jR-Lvc"/>
+                            <binding destination="-2" name="value" keyPath="image" id="Fin-eV-5Qm">
+                                <dictionary key="options">
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
                             <outlet property="delegate" destination="-2" id="Wut-Sg-xkI"/>
                         </connections>
                     </imageView>
@@ -76,9 +80,25 @@
                             <binding destination="-2" name="hidden" keyPath="hiddenControls" id="xpJ-KS-wt2"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fn6-Ta-AaI">
+                        <rect key="frame" x="331" y="18" width="50" height="52"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="49" id="8G2-Q6-Xmf"/>
+                            <constraint firstAttribute="width" constant="50" id="apb-0f-9gl"/>
+                        </constraints>
+                        <buttonCell key="cell" type="squareTextured" title="?" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AvM-yb-PTH">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="random:" target="-2" id="gZy-ON-0qz"/>
+                            <binding destination="-2" name="hidden" keyPath="hiddenControls" id="Zdc-5a-c0d"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="4En-4u-MmG" secondAttribute="trailing" id="9NS-BG-Lnc"/>
+                    <constraint firstItem="fn6-Ta-AaI" firstAttribute="leading" secondItem="vzg-Zz-aRL" secondAttribute="trailing" constant="8" id="AbD-cj-32e"/>
                     <constraint firstItem="4En-4u-MmG" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="F1V-D7-qnr"/>
                     <constraint firstItem="E40-yX-Wvk" firstAttribute="leading" secondItem="6Bb-WQ-Vhk" secondAttribute="trailing" constant="8" id="Na9-Qz-J0c"/>
                     <constraint firstItem="vzg-Zz-aRL" firstAttribute="leading" secondItem="E40-yX-Wvk" secondAttribute="trailing" constant="8" id="SVx-In-Wy3"/>
@@ -88,6 +108,7 @@
                     <constraint firstAttribute="bottom" secondItem="E40-yX-Wvk" secondAttribute="bottom" constant="20" id="dx7-wU-nXM"/>
                     <constraint firstAttribute="bottom" secondItem="4En-4u-MmG" secondAttribute="bottom" id="rGO-jg-M3U"/>
                     <constraint firstItem="4En-4u-MmG" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="uYb-Yl-eB6"/>
+                    <constraint firstAttribute="bottom" secondItem="fn6-Ta-AaI" secondAttribute="bottom" constant="20" id="zQL-Mn-8SJ"/>
                 </constraints>
             </view>
             <connections>

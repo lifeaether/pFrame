@@ -78,17 +78,27 @@
 
 - (NSInteger)nextIndex
 {
-    return MIN( [self currentIndex] + 1, MAX( [self numberOfDataSource]-1, 0 ) );
+    NSInteger next = [self currentIndex] + 1;
+    if ( next < [self numberOfDataSource]-1 ) {
+        return next;
+    } else {
+        return 0;
+    }
 }
 
 - (NSInteger)previousIndex
 {
-    return MAX( [self currentIndex] - 1, 0 );
+    NSInteger previous = [self currentIndex] - 1;
+    if ( previous < 0 ) {
+        return [self numberOfDataSource]-1;
+    } else {
+        return previous;
+    }
 }
 
 - (void)fire:(NSTimer *)timer
 {
-    [self next:self];
+    [self previous:self];
 }
 
 - (IBAction)previous:(id)sender {
@@ -144,6 +154,11 @@
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(fire:) userInfo:nil repeats:YES];
         [self setTimer:timer];
     }
+}
+
+- (IBAction)random:(id)sender {
+    [self setCurrentIndex:rand()%[self numberOfDataSource]];
+    [self next:sender];
 }
 
 - (void)frameViewMouseEntered
