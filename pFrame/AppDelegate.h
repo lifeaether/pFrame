@@ -7,10 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FrameWindowController.h"
 
-@class FrameWindowController;
-
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, FrameWindowDataSource>
 
 @property (weak) IBOutlet FrameWindowController *frameWindowController;
 

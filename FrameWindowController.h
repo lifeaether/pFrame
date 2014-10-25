@@ -8,6 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 
+@protocol FrameWindowDataSource <NSObject>
+
+@required - (NSUInteger)numberOfFrameImage:(id)frameWindowController;
+@required - (NSImage *)imageAtIndex:(id)frameWindowController atIndex:(NSUInteger)index;
+@optional - (BOOL)readyImageAtIndex:(id)frameWindowController atIndex:(NSUInteger)index;
+
+@end
+
 @interface FrameWindowController : NSWindowController
+
+@property (retain) id <FrameWindowDataSource> dataSource;
+@property (retain,readonly) NSImage *image;
+
+- (void)reloadData;
 
 @end
