@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="FrameWindowController">
+            <connections>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5" customClass="FrameWindow">
+            <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="312"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="312"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YEY-Ct-nzE" customClass="FrameImageView">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="312"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="YEY-Ct-nzE" secondAttribute="height" multiplier="487:317" placeholder="YES" id="kZ5-tS-NQF"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="6nv-b4-YpT"/>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="imageItem.image" id="H9O-rL-TNQ"/>
+                        </connections>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="YEY-Ct-nzE" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="AML-Ik-J9P"/>
+                    <constraint firstAttribute="trailing" secondItem="YEY-Ct-nzE" secondAttribute="trailing" id="az5-q8-cYh"/>
+                    <constraint firstItem="YEY-Ct-nzE" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="iIi-UQ-Jed"/>
+                    <constraint firstAttribute="bottom" secondItem="YEY-Ct-nzE" secondAttribute="bottom" id="n3L-nh-qgO"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="276.5" y="359"/>
+        </window>
+    </objects>
+</document>

@@ -7,14 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import "FrameWindowController.h"
+#import "AppConstants.h"
 
-#import "PixivScrapper.h"
 
 @interface AppDelegate ()
 
-@property NSUInteger numberOfImage;
-@property NSMutableDictionary *images;
+- (void)updateMenuStatus;
 
 @end
 
@@ -22,105 +20,157 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
-    [self setNumberOfImage:0];
-    [self setImages:[NSMutableDictionary dictionary]];
 
-    [[self frameWindowController] showWindow:self];
-    [[self frameWindowController] setDataSource:self];
+    // Initialze Preferences.
+    if ( ! [[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowOrdering] ) {
+        [[NSUserDefaults standardUserDefaults] setValue:kApplicationPreferenceSlideShowOrderingDefault forKey:kApplicationPreferenceSlideShowOrdering];
+    }
     
-    PixivScrapper *scrapper = [self sharedScrapper];
-    NSURLSessionTask *task = [scrapper loadTaskForCountOfBookmark:^(NSInteger count, NSError *error){
-        [self setNumberOfImage:count];
-        [[self frameWindowController] reloadData];
-    }];
-    [task resume];
+    if ( ! [[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowEffect] ) {
+        [[NSUserDefaults standardUserDefaults] setValue:kApplicationPreferenceSlideShowEffectFade forKey:kApplicationPreferenceSlideShowEffect];
+    }
+
+    if ( ! [[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowTimeInterval] ) {
+        [[NSUserDefaults standardUserDefaults] setValue:@(60) forKey:kApplicationPreferenceSlideShowTimeInterval];
+    }
+    if ( ! [[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowLayer] ) {
+        [[NSUserDefaults standardUserDefaults] setValue:kApplicationPreferenceSlideShowLayerNormal forKey:kApplicationPreferenceSlideShowLayer];
+    }
+    
+    // Construct Menu Item.
+    {
+        NSMenuItem *item1 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Ordering", nil) action:@selector(selectOrder:) keyEquivalent:@""];
+        NSMenuItem *item2 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Randomize", nil) action:@selector(selectOrder:) keyEquivalent:@""];
+        [item1 setRepresentedObject:kApplicationPreferenceSlideShowOrderingDefault];
+        [item2 setRepresentedObject:kApplicationPreferenceSlideShowOrderingRandomize];
+        [[[self menuItemOrdering] submenu] addItem:item1];
+        [[[self menuItemOrdering] submenu] addItem:item2];
+    }
+    {
+        NSMenuItem *item1 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"1 minute", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
+        NSMenuItem *item2 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"3 minutes", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
+        NSMenuItem *item3 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"5 minutes", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
+        NSMenuItem *item4 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"10 minutes", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
+        NSMenuItem *item5 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"15 minutes", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
+        NSMenuItem *item6 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"30 minutes", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
+        NSMenuItem *item7 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"60 minutes", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
+        NSMenuItem *item8 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"90 minutes", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
+        [item1 setRepresentedObject:@(1)];
+        [item2 setRepresentedObject:@(3)];
+        [item3 setRepresentedObject:@(5)];
+        [item4 setRepresentedObject:@(10)];
+        [item5 setRepresentedObject:@(15)];
+        [item6 setRepresentedObject:@(30)];
+        [item7 setRepresentedObject:@(60)];
+        [item8 setRepresentedObject:@(90)];
+        [[[self menuItemTimeInterval] submenu] addItem:item1];
+        [[[self menuItemTimeInterval] submenu] addItem:item2];
+        [[[self menuItemTimeInterval] submenu] addItem:item3];
+        [[[self menuItemTimeInterval] submenu] addItem:item4];
+        [[[self menuItemTimeInterval] submenu] addItem:item5];
+        [[[self menuItemTimeInterval] submenu] addItem:item6];
+        [[[self menuItemTimeInterval] submenu] addItem:item7];
+        [[[self menuItemTimeInterval] submenu] addItem:item8];
+    }
+    {
+        NSMenuItem *item1 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Fade", nil) action:@selector(selectEffect:) keyEquivalent:@""];
+        NSMenuItem *item2 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Fade Quickly", nil) action:@selector(selectEffect:) keyEquivalent:@""];
+        NSMenuItem *item3 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Fade Slowly", nil) action:@selector(selectEffect:) keyEquivalent:@""];
+        [item1 setRepresentedObject:kApplicationPreferenceSlideShowEffectFade];
+        [item2 setRepresentedObject:kApplicationPreferenceSlideShowEffectFadeQuickly];
+        [item3 setRepresentedObject:kApplicationPreferenceSlideShowEffectFadeSlowly];
+        [[[self menuItemEffect] submenu] addItem:item1];
+        [[[self menuItemEffect] submenu] addItem:item2];
+        [[[self menuItemEffect] submenu] addItem:item3];
+    }
+    {
+        NSMenuItem *item1 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Normal", nil) action:@selector(selectLayer:) keyEquivalent:@""];
+        NSMenuItem *item2 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Front", nil) action:@selector(selectLayer:) keyEquivalent:@""];
+        NSMenuItem *item3 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Back", nil) action:@selector(selectLayer:) keyEquivalent:@""];
+        [item1 setRepresentedObject:kApplicationPreferenceSlideShowLayerNormal];
+        [item2 setRepresentedObject:kApplicationPreferenceSlideShowLayerMostFront];
+        [item3 setRepresentedObject:kApplicationPreferenceSlideShowLayerMostBack];
+        [[[self menuItemLayer] submenu] addItem:item1];
+        [[[self menuItemLayer] submenu] addItem:item2];
+        [[[self menuItemLayer] submenu] addItem:item3];
+    }
+    
+    [self updateMenuStatus];
+    
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:kApplicationPreferenceSlideShowOrdering options:NSKeyValueObservingOptionNew context:nil];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:kApplicationPreferenceSlideShowTimeInterval options:NSKeyValueObservingOptionNew context:nil];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:kApplicationPreferenceSlideShowEffect options:NSKeyValueObservingOptionNew context:nil];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:kApplicationPreferenceSlideShowLayer options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kApplicationPreferenceSlideShowOrdering];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kApplicationPreferenceSlideShowTimeInterval];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kApplicationPreferenceSlideShowEffect];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kApplicationPreferenceSlideShowLayer];
 }
 
-- (PixivScrapper *)sharedScrapper
+- (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    return [[PixivScrapper alloc] initWithScrapingDifinition:@{
-                                                               @"pixiv":@{
-                                                                       @"url":@{
-                                                                               @"bookmark":@"http://www.pixiv.net/bookmark.php",
-                                                                               @"bookmarkpage":@"http://www.pixiv.net/bookmark.php?p=%ld",
-                                                                               @"illust":@{
-                                                                                       @"big":@"http://www.pixiv.net/member_illust.php?mode=big&illust_id=%@",
-                                                                                       @"medium":@"http://www.pixiv.net/member_illust.php?mode=medium&illust_id=%@"
-                                                                                       }
-                                                                               },
-                                                                       @"bookmark":@{
-                                                                               @"count":@"/html/body/div[@id='wrapper']/div[@class='layout-a']/div[@class='layout-column-2']/div/div/span",
-                                                                               @"identifiers":@"/html/body/div[@id='wrapper']/div[@class='layout-a']/div[@class='layout-column-2']/div[@class='_unit manage-unit']/form/div[@class='display_editable_works']/ul/li/a[1]/@href"
-                                                                               },
-                                                                       @"illust":@{
-                                                                               @"big":@{
-                                                                                       @"image":@"/html/body/img/@src"
-                                                                                       }
-                                                                               }
-                                                                       }
-                                                               }];
 }
 
-- (NSUInteger)numberOfFrameImage:(id)frameWindowController
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    return [self numberOfImage];
+    [self updateMenuStatus];
 }
 
-- (BOOL)readyImageAtIndex:(id)frameWindowController atIndex:(NSUInteger)index
+- (void)updateMenuStatus
 {
-    NSDictionary *images = [self images];
-    NSString *key = [NSString stringWithFormat:@"%ld", index];
-    if ( [images valueForKey:key] ) {
-        return YES;
-    } else {
-        PixivScrapper *scrapper = [self sharedScrapper];
-        NSUInteger page = index / [scrapper countPerPage] + 1;
-        NSURLSessionTask *task1 = [scrapper loadTaskForIdentifiersOnBookmarkAtPageIndex:page completionHandler:^(NSArray *identifiers, NSError *error) {
-            if ( error ) {
-                [images setValue:[NSNull null] forKey:key];
-            } else {
-                if ( (index % [scrapper countPerPage]) < [identifiers count] ) {
-                    NSString *identifier = [identifiers objectAtIndex:index % [scrapper countPerPage]];
-                    NSURLSessionTask *task2 = [scrapper loadTaskForImageURLWithIdentifier:identifier completionHandler:^(NSURL *imageURL, NSError *error) {
-                        if ( error ) {
-                            [images setValue:[NSNull null] forKey:key];
-                        } else {
-                            NSURLSessionTask *task3 = [scrapper loadTaskForImageWithIdentifer:identifier imageURL:imageURL completionHandler:^(NSImage *image, NSError *error) {
-                                if ( error ) {
-                                    [images setValue:[NSNull null] forKey:key];
-                                } else {
-                                    NSArray *representations = [image representations];
-                                    if ( [representations count] ) {
-                                        NSImageRep *representation = [representations objectAtIndex:0];
-                                        NSSize newSize = NSMakeSize( [representation pixelsWide], [representation pixelsHigh] );
-                                        [image setSize:newSize];
-                                    }
-                                    [images setValue:image forKey:key];
-                                }
-                            }];
-                            [task3 resume];
-                        }
-                    }];
-                    [task2 resume];
-                } else {
-                    [images setValue:[NSNull null] forKey:key];
-                }
-            }
-        }];
-        [task1 resume];
-        return NO;
+    for ( NSMenuItem *item in [[[self menuItemOrdering] submenu] itemArray] ) {
+        if ( [[item representedObject] isEqualToString:[[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowOrdering]] ) {
+            [item setState:NSOnState];
+        } else {
+            [item setState:NSOffState];
+        }
+    }
+    for ( NSMenuItem *item in [[[self menuItemTimeInterval] submenu] itemArray] ) {
+        if ( [[item representedObject] isEqualToNumber:[[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowTimeInterval]] ) {
+            [item setState:NSOnState];
+        } else {
+            [item setState:NSOffState];
+        }
+    }
+    for ( NSMenuItem *item in [[[self menuItemEffect] submenu] itemArray] ) {
+        if ( [[item representedObject] isEqualToString:[[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowEffect]] ) {
+            [item setState:NSOnState];
+        } else {
+            [item setState:NSOffState];
+        }
+    }
+    for ( NSMenuItem *item in [[[self menuItemLayer] submenu] itemArray] ) {
+        if ( [[item representedObject] isEqualToString:[[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowLayer]] ) {
+            [item setState:NSOnState];
+        } else {
+            [item setState:NSOffState];
+        }
     }
 }
 
-- (NSImage *)imageAtIndex:(id)frameWindowController atIndex:(NSUInteger)index
+
+- (IBAction)selectOrder:(id)sender
 {
-    NSDictionary *images = [self images];
-    NSString *key = [NSString stringWithFormat:@"%ld", index];
-    return [images valueForKey:key];
+    [[NSUserDefaults standardUserDefaults] setValue:[sender representedObject] forKey:kApplicationPreferenceSlideShowOrdering];
+}
+
+- (IBAction)selectTimeInterval:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] setValue:[sender representedObject] forKey:kApplicationPreferenceSlideShowTimeInterval];
+}
+
+- (IBAction)selectEffect:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] setValue:[sender representedObject] forKey:kApplicationPreferenceSlideShowEffect];
+}
+
+- (IBAction)selectLayer:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] setValue:[sender representedObject] forKey:kApplicationPreferenceSlideShowLayer];
 }
 
 @end

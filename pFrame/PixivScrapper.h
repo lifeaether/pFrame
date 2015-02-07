@@ -19,6 +19,7 @@ extern NSString * const kDefinitionKeyImageXPath;
 
 @interface PixivScrapper : NSObject
 
+- (instancetype)init;
 - (instancetype)initWithScrapingDifinition:(NSDictionary *)definition;
 
 - (NSURLSessionTask *)loadTaskForCountOfBookmark:(void (^)(NSInteger count, NSError *error))completionHandler;

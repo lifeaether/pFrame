@@ -2,8 +2,8 @@
 //  FrameWindow.m
 //  pFrame
 //
-//  Created by lifeaether on 2014/10/25.
-//  Copyright (c) 2014年 lifeaether. All rights reserved.
+//  Created by lifeaether on 2015/02/01.
+//  Copyright (c) 2015年 lifeaether. All rights reserved.
 //
 
 #import "FrameWindow.h"
@@ -14,10 +14,7 @@
 {
     self = [super initWithContentRect:contentRect styleMask:aStyle backing:bufferingType defer:flag];
     if ( self ) {
-//        [self setOpaque:NO];
-//        [self setBackgroundColor:[NSColor clearColor]];
-        [self setTitleVisibility:NSWindowTitleHidden];
-        [self setTitlebarAppearsTransparent:YES];
+        [self setBackgroundColor:[NSColor blackColor]];
     }
     return self;
 }

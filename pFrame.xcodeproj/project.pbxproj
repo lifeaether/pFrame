@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE05EFB519FB332B0067E51C /* FrameWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05EFB319FB332B0067E51C /* FrameWindowController.m */; };
-		CE05EFB619FB332B0067E51C /* FrameWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE05EFB419FB332B0067E51C /* FrameWindowController.xib */; };
-		CE05EFB919FB33550067E51C /* FrameWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05EFB819FB33550067E51C /* FrameWindow.m */; };
-		CE05EFBF19FB3B7B0067E51C /* FrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05EFBE19FB3B7B0067E51C /* FrameView.m */; };
+		CE0105BF1A85BFCB008710CC /* FrameWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0105BD1A85BFCB008710CC /* FrameWindowController.m */; };
+		CE0105C01A85BFCB008710CC /* FrameWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0105BE1A85BFCB008710CC /* FrameWindowController.xib */; };
+		CE0105C41A85C2D7008710CC /* SlideShow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0105C31A85C2D7008710CC /* SlideShow.m */; };
+		CE0105C71A85DFE3008710CC /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0105C61A85DFE3008710CC /* AppConstants.m */; };
 		CE05EFC319FB478D0067E51C /* PixivScrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05EFC219FB478D0067E51C /* PixivScrapper.m */; };
+		CE06A3621A7E274200640FCF /* FrameWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE06A3611A7E274200640FCF /* FrameWindow.m */; };
+		CE33E2B31A7E327700002762 /* FrameImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33E2B21A7E327700002762 /* FrameImageView.m */; };
 		CEB0C0CB19FA85DB0076CC76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB0C0CA19FA85DB0076CC76 /* AppDelegate.m */; };
 		CEB0C0CD19FA85DB0076CC76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB0C0CC19FA85DB0076CC76 /* main.m */; };
 		CEB0C0CF19FA85DB0076CC76 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB0C0CE19FA85DB0076CC76 /* Images.xcassets */; };
@@ -30,15 +32,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CE05EFB219FB332B0067E51C /* FrameWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FrameWindowController.h; path = ../FrameWindowController.h; sourceTree = "<group>"; };
-		CE05EFB319FB332B0067E51C /* FrameWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FrameWindowController.m; path = ../FrameWindowController.m; sourceTree = "<group>"; };
-		CE05EFB419FB332B0067E51C /* FrameWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FrameWindowController.xib; path = ../FrameWindowController.xib; sourceTree = "<group>"; };
-		CE05EFB719FB33550067E51C /* FrameWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameWindow.h; sourceTree = "<group>"; };
-		CE05EFB819FB33550067E51C /* FrameWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameWindow.m; sourceTree = "<group>"; };
-		CE05EFBD19FB3B7B0067E51C /* FrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameView.h; sourceTree = "<group>"; };
-		CE05EFBE19FB3B7B0067E51C /* FrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameView.m; sourceTree = "<group>"; };
+		CE0105BC1A85BFCB008710CC /* FrameWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameWindowController.h; sourceTree = "<group>"; };
+		CE0105BD1A85BFCB008710CC /* FrameWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameWindowController.m; sourceTree = "<group>"; };
+		CE0105BE1A85BFCB008710CC /* FrameWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FrameWindowController.xib; sourceTree = "<group>"; };
+		CE0105C21A85C2D7008710CC /* SlideShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideShow.h; sourceTree = "<group>"; };
+		CE0105C31A85C2D7008710CC /* SlideShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideShow.m; sourceTree = "<group>"; };
+		CE0105C51A85DFE3008710CC /* AppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstants.h; sourceTree = "<group>"; };
+		CE0105C61A85DFE3008710CC /* AppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConstants.m; sourceTree = "<group>"; };
 		CE05EFC119FB478D0067E51C /* PixivScrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PixivScrapper.h; sourceTree = "<group>"; };
 		CE05EFC219FB478D0067E51C /* PixivScrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PixivScrapper.m; sourceTree = "<group>"; };
+		CE06A3601A7E274200640FCF /* FrameWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameWindow.h; sourceTree = "<group>"; };
+		CE06A3611A7E274200640FCF /* FrameWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameWindow.m; sourceTree = "<group>"; };
+		CE33E2B11A7E327700002762 /* FrameImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameImageView.h; sourceTree = "<group>"; };
+		CE33E2B21A7E327700002762 /* FrameImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameImageView.m; sourceTree = "<group>"; };
 		CEB0C0C419FA85DB0076CC76 /* pFrame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pFrame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0C0C819FA85DB0076CC76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEB0C0C919FA85DB0076CC76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -69,6 +75,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE0105C11A85C24B008710CC /* Frame */ = {
+			isa = PBXGroup;
+			children = (
+				CE0105BC1A85BFCB008710CC /* FrameWindowController.h */,
+				CE0105BD1A85BFCB008710CC /* FrameWindowController.m */,
+				CE33E2B11A7E327700002762 /* FrameImageView.h */,
+				CE33E2B21A7E327700002762 /* FrameImageView.m */,
+				CE06A3601A7E274200640FCF /* FrameWindow.h */,
+				CE06A3611A7E274200640FCF /* FrameWindow.m */,
+				CE0105BE1A85BFCB008710CC /* FrameWindowController.xib */,
+			);
+			name = Frame;
+			sourceTree = "<group>";
+		};
 		CE05EFC019FB47690067E51C /* Pixiv */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,13 +123,11 @@
 				CEB0C0C919FA85DB0076CC76 /* AppDelegate.h */,
 				CEB0C0CA19FA85DB0076CC76 /* AppDelegate.m */,
 				CEB0C0D019FA85DB0076CC76 /* MainMenu.xib */,
-				CE05EFB219FB332B0067E51C /* FrameWindowController.h */,
-				CE05EFB319FB332B0067E51C /* FrameWindowController.m */,
-				CE05EFB419FB332B0067E51C /* FrameWindowController.xib */,
-				CE05EFB719FB33550067E51C /* FrameWindow.h */,
-				CE05EFB819FB33550067E51C /* FrameWindow.m */,
-				CE05EFBD19FB3B7B0067E51C /* FrameView.h */,
-				CE05EFBE19FB3B7B0067E51C /* FrameView.m */,
+				CE0105C21A85C2D7008710CC /* SlideShow.h */,
+				CE0105C31A85C2D7008710CC /* SlideShow.m */,
+				CE0105C51A85DFE3008710CC /* AppConstants.h */,
+				CE0105C61A85DFE3008710CC /* AppConstants.m */,
+				CE0105C11A85C24B008710CC /* Frame */,
 				CEB0C0CE19FA85DB0076CC76 /* Images.xcassets */,
 				CEB0C0C719FA85DB0076CC76 /* Supporting Files */,
 			);
@@ -222,7 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE05EFB619FB332B0067E51C /* FrameWindowController.xib in Resources */,
+				CE0105C01A85BFCB008710CC /* FrameWindowController.xib in Resources */,
 				CEB0C0CF19FA85DB0076CC76 /* Images.xcassets in Resources */,
 				CEB0C0D219FA85DB0076CC76 /* MainMenu.xib in Resources */,
 			);
@@ -242,12 +260,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE05EFB519FB332B0067E51C /* FrameWindowController.m in Sources */,
-				CE05EFBF19FB3B7B0067E51C /* FrameView.m in Sources */,
 				CEB0C0CD19FA85DB0076CC76 /* main.m in Sources */,
 				CEB0C0CB19FA85DB0076CC76 /* AppDelegate.m in Sources */,
 				CE05EFC319FB478D0067E51C /* PixivScrapper.m in Sources */,
-				CE05EFB919FB33550067E51C /* FrameWindow.m in Sources */,
+				CE0105BF1A85BFCB008710CC /* FrameWindowController.m in Sources */,
+				CE06A3621A7E274200640FCF /* FrameWindow.m in Sources */,
+				CE33E2B31A7E327700002762 /* FrameImageView.m in Sources */,
+				CE0105C41A85C2D7008710CC /* SlideShow.m in Sources */,
+				CE0105C71A85DFE3008710CC /* AppConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

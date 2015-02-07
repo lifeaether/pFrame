@@ -1,5 +1,5 @@
 //
-//  FrameWindow.h
+//  CustomImageView.h
 //  pFrame
 //
 //  Created by lifeaether on 2015/02/01.
@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface FrameWindow : NSWindow
+@interface FrameImageView : NSImageView
 
 @end

@@ -7,11 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "FrameWindowController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, FrameWindowDataSource>
+@interface AppDelegate : NSObject <NSApplicationDelegate>
 
-@property (weak) IBOutlet FrameWindowController *frameWindowController;
+- (IBAction)selectOrder:(id)sender;
+- (IBAction)selectTimeInterval:(id)sender;
+- (IBAction)selectEffect:(id)sender;
+- (IBAction)selectLayer:(id)sender;
+
+@property (weak) IBOutlet NSMenuItem *menuItemOrdering;
+@property (weak) IBOutlet NSMenuItem *menuItemTimeInterval;
+@property (weak) IBOutlet NSMenuItem *menuItemEffect;
+@property (weak) IBOutlet NSMenuItem *menuItemLayer;
 
 @end
 

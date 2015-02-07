@@ -28,6 +28,31 @@ NSString * const kDefinitionKeyImageXPath               = @"pixiv.illust.big.ima
 
 @implementation PixivScrapper
 
+- (instancetype)init
+{
+    return [self initWithScrapingDifinition:@{
+                             @"pixiv":@{
+                                     @"url":@{
+                                             @"bookmark":@"http://www.pixiv.net/bookmark.php",
+                                             @"bookmarkpage":@"http://www.pixiv.net/bookmark.php?p=%ld",
+                                             @"illust":@{
+                                                     @"big":@"http://www.pixiv.net/member_illust.php?mode=big&illust_id=%@",
+                                                     @"medium":@"http://www.pixiv.net/member_illust.php?mode=medium&illust_id=%@"
+                                                     }
+                                             },
+                                     @"bookmark":@{
+                                             @"count":@"/html/body/div[@id='wrapper']/div[@class='layout-a']/div[@class='layout-column-2']/div/div/span",
+                                             @"identifiers":@"/html/body/div[@id='wrapper']/div[@class='layout-a']/div[@class='layout-column-2']/div[@class='_unit manage-unit']/form/div[@class='display_editable_works']/ul/li/a[1]/@href"
+                                             },
+                                     @"illust":@{
+                                             @"big":@{
+                                                     @"image":@"/html/body/img/@src"
+                                                     }
+                                             }
+                                     }
+                             }];
+
+}
 
 - (instancetype)initWithScrapingDifinition:(NSDictionary *)definition
 {
@@ -92,7 +117,7 @@ NSString * const kDefinitionKeyImageXPath               = @"pixiv.illust.big.ima
                     if ( [scanner scanUpToString:@"illust_id=" intoString:nil] &&
                         [scanner scanString:@"illust_id=" intoString:nil] &&
                         [scanner scanInteger:&identifier] ) {
-                            [identifiers addObject:[NSString stringWithFormat:@"%ld", identifier]];
+                        [identifiers addObject:[NSString stringWithFormat:@"%ld", identifier]];
                     } else {
                         // ???
                     }
