@@ -2,11 +2,11 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="FrameWindowController">
             <connections>
+                <outlet property="frameImageView" destination="YEY-Ct-nzE" id="lGh-3K-pQZ"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -16,15 +16,13 @@
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="196" y="240" width="480" height="312"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <value key="minSize" type="size" width="100" height="100"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="312"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YEY-Ct-nzE" customClass="FrameImageView">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="YEY-Ct-nzE" customClass="FrameImageView">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="312"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="YEY-Ct-nzE" secondAttribute="height" multiplier="487:317" placeholder="YES" id="kZ5-tS-NQF"/>
-                        </constraints>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="6nv-b4-YpT"/>
                         <connections>
                             <binding destination="-2" name="value" keyPath="imageItem.image" id="H9O-rL-TNQ"/>
@@ -39,7 +37,7 @@
                 </constraints>
             </view>
             <connections>
-                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+                <outlet property="delegate" destination="-2" id="BoR-wA-CIc"/>
             </connections>
             <point key="canvasLocation" x="276.5" y="359"/>
         </window>

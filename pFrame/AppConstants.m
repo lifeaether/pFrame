@@ -23,3 +23,8 @@ NSString * const kApplicationPreferenceSlideShowLayer                   = @"kApp
 NSString * const kApplicationPreferenceSlideShowLayerNormal             = @"kApplicationPreferenceSlideShowLayerNormal";
 NSString * const kApplicationPreferenceSlideShowLayerMostFront          = @"kApplicationPreferenceSlideShowLayerMostFront";
 NSString * const kApplicationPreferenceSlideShowLayerMostBack           = @"kApplicationPreferenceSlideShowLayerMostBack";
+
+NSString * const kApplicationPreferenceSlideShowFrameSize               = @"kApplicationPreferenceSlideShowFrameSize";
+NSString * const kApplicationPreferenceSlideShowFrameSizeNormal         = @"kApplicationPreferenceSlideShowFrameSizeNormal";
+NSString * const kApplicationPreferenceSlideShowFrameSizeLarge          = @"kApplicationPreferenceSlideShowFrameSizeLarge";
+NSString * const kApplicationPreferenceSlideShowFrameSizeSmall          = @"kApplicationPreferenceSlideShowFrameSizeSmall";

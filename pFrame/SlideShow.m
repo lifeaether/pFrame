@@ -18,6 +18,7 @@
 @property (readonly) NSTimeInterval timeInterval;
 @property (readonly) NSString *orderingType;
 @property (readonly) NSInteger windowLevel;
+@property (readonly) CGFloat sizeScale;
 
 @property NSInteger currentImageIndex;
 @property NSInteger numberOfImages;
@@ -53,6 +54,7 @@
         [self ready];
         
         [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:kApplicationPreferenceSlideShowLayer options:NSKeyValueObservingOptionNew context:nil];
+        [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:kApplicationPreferenceSlideShowFrameSize options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
 }
@@ -60,12 +62,17 @@
 - (void)dealloc
 {
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kApplicationPreferenceSlideShowLayer];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kApplicationPreferenceSlideShowFrameSize];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ( [keyPath isEqualToString:kApplicationPreferenceSlideShowLayer] ) {
         [[[self nextWindowController] window] setLevel:[self windowLevel]];
+    } else if ( [keyPath isEqualToString:kApplicationPreferenceSlideShowFrameSize] ) {
+        if ( [self nextWindowController] ) {
+            [self replaceImage:[[self nextWindowController] imageItem]];
+        }
     }
 }
 
@@ -115,6 +122,19 @@
     }
 }
 
+- (CGFloat)sizeScale
+{
+    if ( [[[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowFrameSize] isEqualToString:kApplicationPreferenceSlideShowFrameSizeNormal] ) {
+        return 0.66f;
+    } else if ( [[[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowFrameSize] isEqualToString:kApplicationPreferenceSlideShowFrameSizeSmall] ) {
+        return 0.33f;
+    } else if ( [[[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowFrameSize] isEqualToString:kApplicationPreferenceSlideShowFrameSizeLarge] ) {
+        return 1.0f;
+    } else {
+        return 0.5f;
+    }
+}
+
 - (void)timeFire:(NSTimer *)timer
 {
     if ( [[self orderingType] isEqualToString:kApplicationPreferenceSlideShowOrderingDefault] ) {
@@ -152,12 +172,16 @@
                     if ( error ) {
                         [self setLoading:NO];
                     } else {
-                        NSURLSessionTask *task3 = [pixiv loadTaskForImageWithIdentifer:identifier imageURL:imageURL completionHandler:^(NSImage *image, NSError *error){
-                            NSLog( @"%@, %@", image, error );
-                            if ( error || ! image ) {
+                        NSURLSessionTask *task3 = [pixiv loadTaskForImageWithIdentifer:identifier imageURL:imageURL completionHandler:^(NSBitmapImageRep *imageRep, NSError *error){
+                            NSLog( @"%@, %@", imageRep, error );
+                            if ( error || ! imageRep ) {
                                 [self setLoading:NO];
                             } else {
                                 [self setLoading:NO];
+                                
+                                NSSize size = NSMakeSize( [imageRep pixelsWide], [imageRep pixelsHigh] );
+                                NSImage *image = [[NSImage alloc] initWithSize:size];
+                                [image addRepresentation:imageRep];
                                 [self performSelectorOnMainThread:@selector(replaceImage:) withObject:@{@"image":image,@"identifier":identifier} waitUntilDone:NO];
                             }
                         }];
@@ -179,15 +203,22 @@
     FrameWindowController *previous = [self nextWindowController];
     FrameWindowController *next = [[FrameWindowController alloc] initWithImageItem:imageItem];
     
-    if ( previous ) {
-        NSRect previousFrame = [[previous window] frame];
-        NSPoint center = NSMakePoint( NSMidX( previousFrame ), NSMidY( previousFrame ) );
-        
-        NSSize imageSize = [[imageItem valueForKey:@"image"] size];
-        NSRect nextFrame = NSMakeRect( center.x - imageSize.width/2, center.y - imageSize.height/2, imageSize.width, imageSize.height );
-        [[next window] setFrame:nextFrame display:NO];
-    } else {
+    NSRect screenFrame = [[[(previous ? previous : next) window] screen] visibleFrame];
+    NSRect previousFrame = [[(previous ? previous : next) window] frame];
+    
+    CGFloat sizeScale = [self sizeScale];
+    NSSize imageSize = [[imageItem valueForKey:@"image"] size];
+    if ( imageSize.width > screenFrame.size.width * sizeScale ) {
+        NSSize newSize = NSMakeSize( screenFrame.size.width * sizeScale, screenFrame.size.width * sizeScale * imageSize.height / imageSize.width );
+        imageSize = newSize;
     }
+    if ( imageSize.height > screenFrame.size.height * sizeScale ) {
+        NSSize newSize = NSMakeSize( screenFrame.size.height * sizeScale * imageSize.width / imageSize.height, screenFrame.size.height * sizeScale );
+        imageSize = newSize;
+    }
+    NSPoint center = NSMakePoint( NSMidX( previousFrame ), NSMidY( previousFrame ) );
+    NSRect nextFrame = NSMakeRect( center.x - imageSize.width/2, center.y - imageSize.height/2, imageSize.width, imageSize.height );
+    [[next window] setFrame:nextFrame display:NO];
     
     [[next window] setLevel:[self windowLevel]];
     

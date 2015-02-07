@@ -17,4 +17,6 @@
 - (IBAction)fadeIn:(id)sender;
 - (IBAction)fadeOut:(id)sender;
 
+@property (weak) IBOutlet NSImageView *frameImageView;
+
 @end

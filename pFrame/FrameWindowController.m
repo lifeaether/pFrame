@@ -31,6 +31,16 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    NSSize size = [[[self imageItem] valueForKey:@"image"] size];
+    NSLayoutConstraint *constraint =[NSLayoutConstraint
+                                     constraintWithItem:[self frameImageView]
+                                     attribute:NSLayoutAttributeHeight
+                                     relatedBy:NSLayoutRelationEqual
+                                     toItem:[self frameImageView]
+                                     attribute:NSLayoutAttributeWidth
+                                     multiplier:size.height/size.width //Aspect ratio: 4*height = 3*width
+                                     constant:0.0f];
+    [[self frameImageView] addConstraint:constraint];
 }
 
 - (NSTimeInterval)fadeDuration

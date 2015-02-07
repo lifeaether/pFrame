@@ -14,11 +14,13 @@
 - (IBAction)selectTimeInterval:(id)sender;
 - (IBAction)selectEffect:(id)sender;
 - (IBAction)selectLayer:(id)sender;
+- (IBAction)selectFrameSize:(id)sender;
 
 @property (weak) IBOutlet NSMenuItem *menuItemOrdering;
 @property (weak) IBOutlet NSMenuItem *menuItemTimeInterval;
 @property (weak) IBOutlet NSMenuItem *menuItemEffect;
 @property (weak) IBOutlet NSMenuItem *menuItemLayer;
+@property (weak) IBOutlet NSMenuItem *menuItemFrameSize;
 
 @end
 

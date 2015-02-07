@@ -152,7 +152,7 @@ NSString * const kDefinitionKeyImageXPath               = @"pixiv.illust.big.ima
     }];
 }
 
-- (NSURLSessionTask *)loadTaskForImageWithIdentifer:(NSString *)identifier imageURL:(NSURL *)imageURL completionHandler:(void (^)(NSImage *image, NSError *error))completionHandler
+- (NSURLSessionTask *)loadTaskForImageWithIdentifer:(NSString *)identifier imageURL:(NSURL *)imageURL completionHandler:(void (^)(NSBitmapImageRep *image, NSError *error))completionHandler
 {
     NSURLSession *session = [NSURLSession sharedSession];
     NSString *referer = [NSString stringWithFormat:[[self definition] valueForKeyPath:kDefinitionKeyImageURL], identifier];
@@ -162,7 +162,7 @@ NSString * const kDefinitionKeyImageXPath               = @"pixiv.illust.big.ima
         if ( error ) {
             completionHandler( nil, error );
         } else {
-            completionHandler( [[NSImage alloc] initWithData:data], nil );
+            completionHandler( [[NSBitmapImageRep alloc] initWithData:data], nil );
         }
     }];
 }

@@ -15,6 +15,7 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
                 <outlet property="menuItemEffect" destination="peC-Wf-yCf" id="I2N-6F-G5k"/>
+                <outlet property="menuItemFrameSize" destination="dd1-3f-SBw" id="lZR-kY-XZg"/>
                 <outlet property="menuItemLayer" destination="QNb-hN-XTz" id="LZh-Mm-GaE"/>
                 <outlet property="menuItemOrdering" destination="CuE-Vf-lpu" id="kUX-gB-f4v"/>
                 <outlet property="menuItemTimeInterval" destination="wI5-V0-ELl" id="DU0-E4-VLH"/>
@@ -76,7 +77,7 @@
                                     <action selector="newDocument:" target="-1" id="4Si-XN-c54"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
+                            <menuItem title="Open" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
                                     <action selector="open:" target="ASJ-QX-Tq3" id="Yk8-7g-OOj"/>
                                 </connections>
@@ -656,6 +657,10 @@
                             <menuItem title="Layer" id="QNb-hN-XTz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Layer" id="ewH-jN-ocE"/>
+                            </menuItem>
+                            <menuItem title="Frame Size" id="dd1-3f-SBw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Frame Size" id="JgJ-zR-hiu"/>
                             </menuItem>
                         </items>
                     </menu>

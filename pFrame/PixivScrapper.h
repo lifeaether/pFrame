@@ -25,7 +25,7 @@ extern NSString * const kDefinitionKeyImageXPath;
 - (NSURLSessionTask *)loadTaskForCountOfBookmark:(void (^)(NSInteger count, NSError *error))completionHandler;
 - (NSURLSessionTask *)loadTaskForIdentifiersOnBookmarkAtPageIndex:(NSInteger)index completionHandler:(void (^)(NSArray *identifiers, NSError *error))completionHandler;
 - (NSURLSessionTask *)loadTaskForImageURLWithIdentifier:(NSString *)identifier completionHandler:(void (^)(NSURL *imageURL, NSError *error))completionHandler;
-- (NSURLSessionTask *)loadTaskForImageWithIdentifer:(NSString *)identifier imageURL:(NSURL *)imageURL completionHandler:(void (^)(NSImage *image, NSError *error))completionHandler;
+- (NSURLSessionTask *)loadTaskForImageWithIdentifer:(NSString *)identifier imageURL:(NSURL *)imageURL completionHandler:(void (^)(NSBitmapImageRep *image, NSError *error))completionHandler;
 
 
 - (NSInteger)countPerPage;

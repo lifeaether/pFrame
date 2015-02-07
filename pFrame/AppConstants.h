@@ -25,3 +25,8 @@ extern NSString * const kApplicationPreferenceSlideShowLayerNormal;
 extern NSString * const kApplicationPreferenceSlideShowLayerMostFront;
 extern NSString * const kApplicationPreferenceSlideShowLayerMostBack;
 
+extern NSString * const kApplicationPreferenceSlideShowFrameSize;
+extern NSString * const kApplicationPreferenceSlideShowFrameSizeNormal;
+extern NSString * const kApplicationPreferenceSlideShowFrameSizeLarge;
+extern NSString * const kApplicationPreferenceSlideShowFrameSizeSmall;
+
