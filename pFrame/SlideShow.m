@@ -53,6 +53,7 @@
         [self setLoading:NO];
         [self ready];
         
+        [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:kApplicationPreferenceSlideShowTimeInterval options:NSKeyValueObservingOptionNew context:nil];
         [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:kApplicationPreferenceSlideShowLayer options:NSKeyValueObservingOptionNew context:nil];
         [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:kApplicationPreferenceSlideShowFrameSize options:NSKeyValueObservingOptionNew context:nil];
     }
@@ -61,6 +62,7 @@
 
 - (void)dealloc
 {
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kApplicationPreferenceSlideShowTimeInterval];
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kApplicationPreferenceSlideShowLayer];
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:kApplicationPreferenceSlideShowFrameSize];
 }
@@ -73,6 +75,8 @@
         if ( [self nextWindowController] ) {
             [self replaceImage:[[self nextWindowController] imageItem]];
         }
+    } else if ( [keyPath isEqualToString:kApplicationPreferenceSlideShowTimeInterval] ) {
+        [self restart:nil];
     }
 }
 
@@ -83,7 +87,11 @@
             NSLog( @"loadTaskForCountOfBookmark\n%@", error );
         } else {
             NSLog( @"numberOfImage %ld", numberOfBookmark );
-            [self setNumberOfImages:numberOfBookmark];
+            dispatch_async( dispatch_get_main_queue(), ^() {
+                [self setNumberOfImages:numberOfBookmark];
+                [self loadImageAtIndex:0];
+                [self start:nil];
+            });
         }
     }];
     [task resume];

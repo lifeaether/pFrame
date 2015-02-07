@@ -31,7 +31,7 @@
     }
 
     if ( ! [[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowTimeInterval] ) {
-        [[NSUserDefaults standardUserDefaults] setValue:@(60) forKey:kApplicationPreferenceSlideShowTimeInterval];
+        [[NSUserDefaults standardUserDefaults] setValue:@(1*60) forKey:kApplicationPreferenceSlideShowTimeInterval];
     }
     if ( ! [[NSUserDefaults standardUserDefaults] valueForKey:kApplicationPreferenceSlideShowLayer] ) {
         [[NSUserDefaults standardUserDefaults] setValue:kApplicationPreferenceSlideShowLayerNormal forKey:kApplicationPreferenceSlideShowLayer];
@@ -58,14 +58,14 @@
         NSMenuItem *item6 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"30 minutes", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
         NSMenuItem *item7 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"60 minutes", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
         NSMenuItem *item8 = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"90 minutes", nil) action:@selector(selectTimeInterval:) keyEquivalent:@""];
-        [item1 setRepresentedObject:@(1)];
-        [item2 setRepresentedObject:@(3)];
-        [item3 setRepresentedObject:@(5)];
-        [item4 setRepresentedObject:@(10)];
-        [item5 setRepresentedObject:@(15)];
-        [item6 setRepresentedObject:@(30)];
-        [item7 setRepresentedObject:@(60)];
-        [item8 setRepresentedObject:@(90)];
+        [item1 setRepresentedObject:@(1*60)];
+        [item2 setRepresentedObject:@(3*60)];
+        [item3 setRepresentedObject:@(5*60)];
+        [item4 setRepresentedObject:@(10*60)];
+        [item5 setRepresentedObject:@(15*60)];
+        [item6 setRepresentedObject:@(30*60)];
+        [item7 setRepresentedObject:@(60*60)];
+        [item8 setRepresentedObject:@(90*60)];
         [[[self menuItemTimeInterval] submenu] addItem:item1];
         [[[self menuItemTimeInterval] submenu] addItem:item2];
         [[[self menuItemTimeInterval] submenu] addItem:item3];
